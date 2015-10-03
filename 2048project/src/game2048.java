@@ -29,24 +29,28 @@ public class game2048 {
 				{
 					System.out.println("up ");
 					addNumber();
+					//moveUp();
 					checkCell();
 				}
 				if(e.getKeyCode() == 40 )
 				{
 					System.out.println("Down ");
 					addNumber();
+					//moveDown();
 					checkCell();
 				}
 				if(e.getKeyCode() == 39)
 				{
 					System.out.println("right ");
 					addNumber();
+					//moveRight();
 					checkCell();
 				}
 				if(e.getKeyCode() == 37)
 				{
 					System.out.println("left ");
 					addNumber();
+					//moveLeft();
 					checkCell();
 				}
 			}
@@ -67,7 +71,7 @@ public class game2048 {
 		for(int i=0;i<16;i++)
 		{
 			panel[i]=new JPanel();
-			button[i]=new JButton();
+			button[i]=new JButton("");
 			button[i].setBackground(Color.GRAY);
 			panel[i].setLayout(new GridLayout(1,1));
 			panel[i].setMaximumSize(new Dimension(150,150));
@@ -80,12 +84,58 @@ public class game2048 {
 	}
 	protected boolean checkCell()
 	{
+		boolean win=true;
+		for(int i=0;i<16;i++)
+		{
+			if(button[i].getText()==(""))
+			{
+				win=false;
+			}
+		}
+		if(win)
+		{
+			System.out.println("you lose");
+		}
 		return false;
 	}
 	
 	protected void addNumber()
 	{
+		boolean randomBoo = randomGenerator.nextBoolean();
+		int randomInt = randomGenerator.nextInt(15);
+		if(button[randomInt].getText().equals(""))
+		{
+			if(randomBoo==true)
+			{
+				button[randomInt].setText("2");
+			}
+			else
+			{
+				button[randomInt].setText("4");
+			}
+		}
+		else
+		{
+			for(int i=0;i<16;i++)
+			if(button[i].getText()==(""))
+			{
+				if(randomBoo==true)
+				{
+					button[i].setText("2");
+					break;
+				}
+				else
+				{
+					button[i].setText("4");
+					break;
+				}	
+			}
+			
+			
+			
+		}
 		
 	}
-
+	
 }
+
