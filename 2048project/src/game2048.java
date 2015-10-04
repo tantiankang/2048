@@ -73,6 +73,7 @@ public class game2048 {
 			panel[i]=new JPanel();
 			button[i]=new JButton("");
 			button[i].setBackground(Color.GRAY);
+			button[i].setFont(new Font("Arial", Font.PLAIN, 40));
 			panel[i].setLayout(new GridLayout(1,1));
 			panel[i].setMaximumSize(new Dimension(150,150));
 			panel[i].requestFocusInWindow();
@@ -165,13 +166,30 @@ public class game2048 {
 	}
 	protected void moveLeft()
 	{
-		
+		for(int h=0;h<=12;h+=4)
+		{
+			for (int i =0;i<3;i++)
+			{
+				combineCells(button[1+h],button[0+h]);
+				combineCells(button[2+h],button[1+h]);
+				combineCells(button[3+h],button[2+h]);
+			}
+		}
 	}
 	protected void moveRight()
 	{
-		
+		for(int h=0;h<=12;h=h+4)
+		{
+			for (int i =0;i<3;i++)
+			{
+				combineCells(button[2+h],button[3+h]);
+				combineCells(button[1+h],button[2+h]);
+				combineCells(button[0+h],button[1+h]);
+			}
+		}
 	}
 	
+	// x = adding to y // y = added (change new number)
 	protected void combineCells(JButton x,JButton y)
 	{
 		if(y.getText().equals("") && !x.getText().equals(""))
