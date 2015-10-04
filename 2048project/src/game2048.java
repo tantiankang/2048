@@ -28,29 +28,29 @@ public class game2048 {
 				if(e.getKeyCode() == 38)
 				{
 					System.out.println("up ");
+					moveUp();
 					addNumber();
-					//moveUp();
 					checkCell();
 				}
 				if(e.getKeyCode() == 40 )
 				{
 					System.out.println("Down ");
+					moveDown();
 					addNumber();
-					//moveDown();
 					checkCell();
 				}
 				if(e.getKeyCode() == 39)
 				{
 					System.out.println("right ");
+					moveRight();
 					addNumber();
-					//moveRight();
 					checkCell();
 				}
 				if(e.getKeyCode() == 37)
 				{
 					System.out.println("left ");
+					moveLeft();
 					addNumber();
-					//moveLeft();
 					checkCell();
 				}
 			}
@@ -94,7 +94,8 @@ public class game2048 {
 		}
 		if(win)
 		{
-			System.out.println("you lose");
+			JOptionPane.showMessageDialog(null, "You lose");
+			mainFrame.dispose();
 		}
 		return false;
 	}
@@ -135,6 +136,56 @@ public class game2048 {
 			
 		}
 		
+	}
+	
+	protected void moveUp()
+	{
+		for(int h=0;h<4;h++)
+		{
+			for(int i=0;i<3;i++)
+			{
+				combineCells(button[4+h],button[0+h]);
+				combineCells(button[8+h],button[4+h]);
+				combineCells(button[12+h],button[8+h]);
+			}
+		}
+
+	}
+	protected void moveDown()
+	{
+		for(int h=0;h<4;h++)
+		{
+			for(int i=0;i<3;i++)
+			{
+				combineCells(button[8+h],button[12+h]);
+				combineCells(button[4+h],button[8+h]);
+				combineCells(button[0+h],button[4+h]);
+			}
+		}
+	}
+	protected void moveLeft()
+	{
+		
+	}
+	protected void moveRight()
+	{
+		
+	}
+	
+	protected void combineCells(JButton x,JButton y)
+	{
+		if(y.getText().equals("") && !x.getText().equals(""))
+		{
+			y.setText(x.getText());
+			x.setText("");
+		}
+		if(y.getText().equals(x.getText()) && !x.getText().equals(""))
+		{
+			int number = Integer.parseInt(y.getText());
+			number = number + number;
+			y.setText(""+number);
+			x.setText("");
+		}
 	}
 	
 }
